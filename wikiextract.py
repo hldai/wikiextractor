@@ -2116,9 +2116,9 @@ def replaceInternalLinks(text):
                     pipe = last  # advance
                 curp = e1
             label = inner[pipe + 1:].strip()
-        # link_text = makeInternalLink(title, label)
-        link_text = '{}|{}'.format(title, label)
-        link_text = '[[{}]]'.format(link_text.replace(']]', ''))
+        link_text = makeInternalLink(title, label)
+        # link_text = '{}|{}'.format(title, label)
+        # link_text = '[[{}]]'.format(link_text.replace(']]', ''))
         # link_text = '[[{}|{}]]'.format(title, label)
         # print(link_text)
         res += text[cur:s] + link_text + trail
@@ -2617,9 +2617,9 @@ def process_dump(input_file, template_file, out_file, file_size, file_compress,
             job = (id, revid, title, page, page_num)
             jobs_queue.put(job)  # goes to any available extract_process
             page_num += 1
-            # if page_num % 1000 == 0:
-            #     print(page_num)
-                # break
+            if page_num % 10 == 0:
+                print(page_num)
+                break
         page = None  # free memory
 
     input.close()
@@ -2704,7 +2704,7 @@ def reduce_process(opts, output_queue, spool_length,
     if out_file:
         # nextFile = NextFile(out_file)
         # output = OutputSplitter(nextFile, file_size, file_compress)
-        output = open('d:/data/res/wiki-text.txt', 'w', encoding='utf-8')
+        output = open('d:/data/res/wiki/wiki-text.txt', 'w', encoding='utf-8', newline='\n')
     else:
         output = sys.stdout if PY2 else sys.stdout.buffer
         if file_compress:
